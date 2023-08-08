@@ -20,13 +20,31 @@
             </h1>
         </div>
         <div class="col-md-4">
-            <p>
+<!--            <p>-->
 
-                <a href="/login" class="btn btn-primary">SignUp</a>
-                <a href="/login" class="btn btn-primary">Login</a>
-                <a href="/login" class="btn btn-primary">Logout</a>
+<!--                <a href="/login" class="btn btn-primary">SignUp</a>-->
+<!--                <a href="/login" class="btn btn-primary">Login</a>-->
+<!--                <a href="/login" class="btn btn-primary">Logout</a>-->
 
-            </p>
+<!--            </p>-->
+            <nav style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px">
+                {% if user.is_authenticated %}
+                <ul>
+                    <li><a href="{% url 'noteapp:note' %}" role="button">Add note</a></li>
+                    <li><a href="{% url 'noteapp:tag' %}" role="button">Add Tag</a></li>
+                </ul>
+                <ul>
+                    <li>Welcome <b>{{ user.username }}!</b></li>
+                    <li><a href="{% url 'users:profile' %}" role="button" class="btn btn-primary">Profile</a></li>
+                    <li><a href="{% url 'users:logout' %}" role="button" class="btn btn-primary">Logout</a></li>
+                </ul>
+                {% else %}
+                <ul>
+                    <li><a href="{% url 'users:signup' %}" role="button" class="btn btn-primary">Sign Up</a></li>
+                    <li><a href="{% url 'users:login' %}" role="button" class="btn btn-primary">Login</a></li>
+                </ul>
+                {% endif %}
+            </nav>
         </div>
     </div>
 
