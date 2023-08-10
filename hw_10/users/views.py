@@ -8,13 +8,13 @@ from .forms import RegisterForm, LoginForm, ProfileForm
 
 def signupuser(request): # noqa
     if request.user.is_authenticated:
-        return redirect(to='quotes:main')
+        return redirect(to='quotes:root')
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(to='quotes:main')
+            return redirect(to='quotes:root')
         else:
             return render(request, 'users/signup.html', context={"form": form})
 
@@ -22,7 +22,7 @@ def signupuser(request): # noqa
 
 def loginuser(request): # noqa
     if request.user.is_authenticated:
-        return redirect(to='quotes:main')
+        return redirect(to='quotes:root')
 
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
@@ -31,7 +31,7 @@ def loginuser(request): # noqa
             return redirect(to='users:login')
 
         login(request, user)
-        return redirect(to='quotes:main')
+        return redirect(to='quotes:root')
 
     return render(request, 'users/login.html', context={"form": LoginForm()})
 
@@ -39,7 +39,7 @@ def loginuser(request): # noqa
 @login_required
 def logoutuser(request): # noqa
     logout(request)
-    return redirect(to='quotes:main')
+    return redirect(to='quotes:root')
 
 
 @login_required
